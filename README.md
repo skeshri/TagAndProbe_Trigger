@@ -1,13 +1,13 @@
 # TagAndProbe_Trigger
 
-#https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_92X_samples_R
-
-cmsrel CMSSW_9_4_0
-cd CMSSW_9_4_0/src
-cmsenv
-git cms-init
-git cms-merge-topic lsoffi:CMSSW_9_4_0_pre3_TnP
-scram b -j 9
+#https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_92X_samples_R  
+  
+cmsrel CMSSW_9_4_0  
+cd CMSSW_9_4_0/src  
+cmsenv  
+git cms-init  
+git cms-merge-topic lsoffi:CMSSW_9_4_0_pre3_TnP  
+scram b -j 9  
 
 
 # Add the area containing the MVA weights (from cms-data, to appear in “external”).
