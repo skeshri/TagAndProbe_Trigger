@@ -1,4 +1,4 @@
-#include "Efficiency/Analyzer/interface/Ntupler.h"
+#include "TagAndProbe_Trigger/NtupleProducer/interface/Ntupler.h"
 
 //
 // constants, enums and typedefs

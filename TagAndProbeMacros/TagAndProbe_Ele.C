@@ -183,9 +183,11 @@ for(int i=0; i<systematicVar.size();i++)
 
       // if (Cut(ientry) < 0) continue;
     }
-file->Write(); 
+   file->Write(); 
   }
  
+  
+
 }
 
 

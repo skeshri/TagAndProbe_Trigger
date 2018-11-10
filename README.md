@@ -1,30 +1,20 @@
 # TagAndProbe_Trigger
 
-######https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_92X_samples_R  
-  
-cmsrel CMSSW_9_4_0  
-cd CMSSW_9_4_0/src  
+###### https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_92X_samples_R
+cmsrel CMSSW_9_4_9  
+cd CMSSW_9_4_9/src  
 cmsenv  
 git cms-init  
-git cms-merge-topic lsoffi:CMSSW_9_4_0_pre3_TnP  
-scram b -j 9  
+git cms-merge-topic guitargeek:EgammaID_9_4_X  
+scram b -j 4  
 
+###### Download the TagAndProbe_trigger repository
+git clone https://github.com/skeshri/TagAndProbe_Trigger.git
+scram b -j 4  
 
-###### Add the area containing the MVA weights (from cms-data, to appear in “external”).
-###### Note: the “external” area appears after “scram build” is run at least once, as above
-
-cd $CMSSW_BASE/external  
-###### below, you may have a different architecture, this is just one example from lxplus
-cd slc6_amd64_gcc630/  
-git clone https://github.com/lsoffi/RecoEgamma-PhotonIdentification.git data/RecoEgamma/PhotonIdentification/data  
-cd data/RecoEgamma/PhotonIdentification/data  
-git checkout CMSSW_9_4_0_pre3_TnP  
-cd $CMSSW_BASE/external  
-cd slc6_amd64_gcc630/  
-git clone https://github.com/lsoffi/RecoEgamma-ElectronIdentification.git data/RecoEgamma/ElectronIdentification/data  
-cd data/RecoEgamma/ElectronIdentification/data  
-git checkout CMSSW_9_4_0_pre3_TnP  
-###### Go back to the src/
-cd $CMSSW_BASE/src  
-
-
+## For Test Run 
+cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test  
+cmsRun runNtupler.py
+cp TnP_ntuple.root $CMSSW_BASE/src/TagAndProbe_Trigger/TagAndProbeMacros  (one example file is already present in the directory)  
+./compileNrun_tnp.sh TagAndProbe_Ele.C (OR TagAndProbe_Mu.C, This script is self explaining when run it)  
+./runPlotting.sh histNames_Ele.txt (OR histNames_Mu.txt, this will generate final results in the "results" directory)   
