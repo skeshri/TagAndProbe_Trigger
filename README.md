@@ -14,7 +14,11 @@ scram b -j 4
 
 ## For Test Run 
 cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test  
+<br>
 cmsRun runNtupler.py
+<br>
 cp TnP_ntuple.root $CMSSW_BASE/src/TagAndProbe_Trigger/TagAndProbeMacros  (one example file is already present in the directory)  
-./compileNrun_tnp.sh TagAndProbe_Ele.C (OR TagAndProbe_Mu.C, This script is self explaining when run it)  
+<br>
+./compileNrun_tnp.sh TagAndProbe_Ele.C (OR TagAndProbe_Mu.C, This script is self explaining when run it) 
+<br> 
 ./runPlotting.sh histNames_Ele.txt (OR histNames_Mu.txt, this will generate final results in the "results" directory)   
