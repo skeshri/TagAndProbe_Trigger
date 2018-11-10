@@ -9,7 +9,7 @@ git cms-merge-topic guitargeek:EgammaID_9_4_X
 scram b -j 4  
 
 ###### Download the TagAndProbe_trigger repository
-git clone https://github.com/skeshri/TagAndProbe_Trigger.git
+git clone https://github.com/skeshri/TagAndProbe_Trigger.git  
 scram b -j 4  
 
 ## For Test Run 
