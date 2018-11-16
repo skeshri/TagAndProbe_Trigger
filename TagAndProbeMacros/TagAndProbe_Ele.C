@@ -130,7 +130,8 @@ for(int i=0; i<systematicVar.size();i++)
 
       if(!(tag_EleId && tag_EleKin && tag_TriggerMatch))continue;
 
-      bool probe_EleId = HWW_Electron_Def(second, ele_etaSC->at(second));
+      //bool probe_EleId = HWW_Electron_Def(second, ele_etaSC->at(second));
+      bool probe_EleId = HWW_Electron_NewDef(second, ele_etaSC->at(second));
       bool probe_EleKin = fabs(ele_etaSC->at(second))<2.5;
 
       if(!(probe_EleId && probe_EleKin)) continue;
@@ -144,50 +145,36 @@ for(int i=0; i<systematicVar.size();i++)
       h_Ele35_pt_total->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>40)h_Ele35_eta_total->Fill(ele_etaSC->at(second)); 
       h_Ele35_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele35_eta_total->Fill(ele_etaSC->at(second)); 
-     // if(ele_pt->at(second)>40) h_Ele35_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
      
       h_Ele23_Ele12_leg1_pt_total->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>25)h_Ele23_Ele12_leg1_eta_total->Fill(ele_etaSC->at(second)); 
       h_Ele23_Ele12_leg1_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele23_Ele12_leg1_eta_total->Fill(ele_etaSC->at(second)); 
-      //if(ele_pt->at(second)>25)h_Ele23_Ele12_leg1_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
 
       h_Ele23_Ele12_leg2_pt_total->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>15)h_Ele23_Ele12_leg2_eta_total->Fill(ele_etaSC->at(second)); 
       h_Ele23_Ele12_leg2_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele23_Ele12_leg2_eta_total->Fill(ele_etaSC->at(second)); 
-      //if(ele_pt->at(second)>15)h_Ele23_Ele12_leg2_pt_eta_total->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
 
       if (passFilterEle35->at(second)){
       h_Ele35_pt_pass->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>40)h_Ele35_eta_pass->Fill(ele_etaSC->at(second)); 
       h_Ele35_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele35_eta_pass->Fill(ele_etaSC->at(second)); 
-      //if(ele_pt->at(second)>40)h_Ele35_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
       } 
       if (passFilterEle23_12_leg1->at(second)){
       h_Ele23_Ele12_leg1_pt_pass->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>25)h_Ele23_Ele12_leg1_eta_pass->Fill(ele_etaSC->at(second)); 
       h_Ele23_Ele12_leg1_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele23_Ele12_leg1_eta_pass->Fill(ele_etaSC->at(second)); 
-      //if(ele_pt->at(second)>25)h_Ele23_Ele12_leg1_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
       } 
       if (passFilterEle23_12_leg2->at(second)){
       h_Ele23_Ele12_leg2_pt_pass->Fill(ele_pt->at(second)); 
       if(ele_pt->at(second)>15)h_Ele23_Ele12_leg2_eta_pass->Fill(ele_etaSC->at(second)); 
        h_Ele23_Ele12_leg2_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
-      //h_Ele23_Ele12_leg2_eta_pass->Fill(ele_etaSC->at(second)); 
-      //if(ele_pt->at(second)>15) h_Ele23_Ele12_leg2_pt_eta_pass->Fill(ele_etaSC->at(second),ele_pt->at(second)); 
       } 
 
       // if (Cut(ientry) < 0) continue;
     }
-   file->Write(); 
+file->Write(); 
   }
  
-  
-
 }
 
 
@@ -208,7 +195,7 @@ double relIso = ele_relCombIsoWithEA->at(i);
 
 if(fabs(eta) < 1.479){
 if (sieie >= 0.011) return false;
-if (fabs(dEtaSC) >= 0.004) return false;
+//if (fabs(dEtaSC) >= 0.004) return false;
 if (hoe >= 0.06) return false;
 if (fabs(eInvMinusPInv) >= 0.013) return false;
 if (dr03TkSumPt_overPt/ele_pt->at(i) >= 0.08) return false;
@@ -224,7 +211,7 @@ if (ele_dz->at(i)>=0.1) return false;
 
 else{
 if (sieie >= 0.03) return false;
-if (fabs(dEtaSC) >= 0.006) return false;
+//if (fabs(dEtaSC) >= 0.006) return false;
 if (hoe >= 0.07) return false;
 if (fabs(eInvMinusPInv) >= 0.013) return false;
 if (dr03TkSumPt_overPt/ele_pt->at(i) >= 0.08) return false;
@@ -242,9 +229,51 @@ return true;
 
 }
 
+bool TagAndProbe::HWW_Electron_NewDef(int i, double eta)
+{
 
+double sieie = ele_full5x5_sigmaIetaIeta->at(i);
+double dEtaSC = ele_dEtaSeed->at(i);
+double dPhiIn = ele_dPhiIn->at(i);
+double hoe = ele_hOverE->at(i);
+double eInvMinusPInv = ele_ooEmooP->at(i);
+double dr03TkSumPt_overPt = ele_dr03TkSumPt->at(i);
+double dr03EcalRecHitSumEt_overPt = ele_dr03EcalRecHitSumEt->at(i);
+double dr03HcalDepth1TowerSumEt_overPt = ele_dr03HcalDepth1TowerSumEt->at(i);
+double lostHits = ele_expectedMissingInnerHits->at(i);
+bool convVeto = ele_passConversionVeto->at(i);
+double relIso = ele_relCombIsoWithEA->at(i);
 
+if(fabs(eta) < 1.479){    // Barrel
+double hoe_compareWith = 0.05 +(1.12/ele_energySC->at(i)) + (0.0368*(rho/ele_energySC->at(i)));
+if (sieie >= 0.0128) return false;
+if (fabs(dEtaSC) >= 0.00523) return false;
+if (fabs(dPhiIn) >= 0.159) return false;
+if (hoe >= hoe_compareWith) return false;
+if (fabs(eInvMinusPInv) >= 0.193) return false;
+if (!(lostHits <= 2)) return false;
+if (!convVeto) return false;
+if (relIso >= 0.168) return false;
+if (!passMVAIsoWP90) return false;
+if (ele_d0->at(i)>=0.05) return false;
+if (ele_dz->at(i)>=0.1) return false;
+}
 
+else{
+double hoe_compareWith = 0.05 +(0.5/ele_energySC->at(i)) + (0.201*(rho/ele_energySC->at(i)));
+if (sieie >= 0.03) return false;
+if (fabs(dEtaSC) >= 0.00984) return false;
+if (fabs(dPhiIn) >= 0.157) return false;
+if (hoe >= hoe_compareWith) return false;
+if (fabs(eInvMinusPInv) >= 0.014) return false;
+if (!(lostHits <= 3)) return false;
+if (!convVeto) return false;
+if (relIso >= 0.185) return false;
+if (!passMVAIsoWP90) return false;
+if (ele_d0->at(i)>=0.1) return false;
+if (ele_dz->at(i)>=0.2) return false;
+}
 
+return true;
 
-
+}
