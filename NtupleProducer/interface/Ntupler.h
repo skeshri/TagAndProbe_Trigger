@@ -144,6 +144,9 @@ class Ntupler : public edm::EDAnalyzer {
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
      edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
      edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
+
+      // L1 Token
+      edm::EDGetToken muToken;
   
      // Verbose output for ID
      bool isMC_;

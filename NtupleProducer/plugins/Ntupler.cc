@@ -111,6 +111,7 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig):
     (iConfig.getParameter<edm::InputTag>
      ("muonsMiniAOD"));
 
+  muToken    = consumes<BXVector<l1t::Muon>>(iConfig.getParameter<edm::InputTag>("muInputTag"));
 
   //
   // Set up the ntuple structure
@@ -740,7 +741,10 @@ if(isMC_){
   edm::Handle<edm::View<pat::Muon> > muons;
 //  if(isAOD) iEvent.getByToken(muonsToken_,muons);
    iEvent.getByToken(muonsMiniAODToken_,muons);
-  
+
+ // Handle over L1-muon
+    Handle<BXVector<l1t::Muon>> L1muons;
+    iEvent.getByToken(muToken,L1muons);  
 
   if(doMuon_)
   {
@@ -817,6 +821,41 @@ if(isMC_){
 
      for(unsigned i=0; i < muons->size();++i ) {
        const auto mu = muons->ptrAt(i);
+
+       bool L1Mu7 = false;
+       bool L1Mu23 = false;
+
+       float temp1 = 9999.0;
+       float temp2 = 9999.0;
+       float delRL1_7=9999;
+       float delRL1_23=9999;
+       float delRL1_7_toBeChecked=9999;
+       float delRL1_23_toBeChecked=9999;
+
+       // L1 Matching with check of quality cut
+       if (L1muons.isValid()) {
+        for(int i=L1muons->getFirstBX(); i<=L1muons->getLastBX();i++) {
+          for(std::vector<l1t::Muon>::const_iterator L1mu = L1muons->begin(i); L1mu != L1muons->end(i); ++L1mu) {
+                float L1MuPt = L1mu->pt(); 
+                float L1MuEta = L1mu->eta();
+                float L1MuPhi = L1mu->phi();
+                float L1MuQual = L1mu->hwQual();
+                if((L1MuPt >= 5 || L1MuPt >= 7) && (L1MuQual>=12 && L1MuQual<=15))
+                {
+                   delRL1_7 = deltaR(L1MuEta,L1MuPhi ,mu->eta(),mu->phi());
+                   if (delRL1_7<temp1) temp1 = delRL1_7;
+                }
+                if((L1MuPt >= 20 || L1MuPt >= 23) && (L1MuQual>=12 && L1MuQual<=15))
+                {
+                   delRL1_23 = deltaR(L1MuEta,L1MuPhi ,mu->eta(),mu->phi());
+                   if (delRL1_23<temp2) temp2 = delRL1_23;
+                }
+                if(temp1<0.1) delRL1_7_toBeChecked=temp1;
+                if(temp2<0.1) delRL1_23_toBeChecked=temp2;
+           }
+         }  
+       }
+
        bool filterIsoMu27 = false;
        bool filterMu17_Mu8_Leg1 = false;
        bool filterMu17_Mu8_Leg2 = false;
@@ -839,8 +878,8 @@ if(isMC_){
           if(mu_filters[1].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_Leg2 = true; }
           if(mu_filters[2].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_Leg1 = true; }
           if(mu_filters[3].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_IsoLeg = true; }
-          if(mu_filters[4].Contains(filter) && foundTheLeg)  {filterMu12_Ele23_legMu = true; }
-          if(mu_filters[5].Contains(filter) && foundTheLeg)  {filterMu23_Ele12_legMu = true; }
+          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=12 && delRL1_7_toBeChecked < 0.1 )  {filterMu12_Ele23_legMu = true; }
+          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=23 && delRL1_23_toBeChecked < 0.1 ) {filterMu23_Ele12_legMu = true; }
      
        }
        passFilterIsoMu27       .push_back(filterIsoMu27);
