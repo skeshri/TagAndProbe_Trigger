@@ -294,6 +294,7 @@ public :
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    bool    HWW_Electron_Def(int i, double eta);
+   bool    HWW_Electron_NewDef(int i, double eta);
    bool    HWW_Muon_Def(int i, double pt);
 
 };
