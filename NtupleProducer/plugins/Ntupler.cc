@@ -690,7 +690,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    }
  }
-
+/*
 //cout<<"+==========================================================="<<endl;
 if(isMC_){
     genElectron_pt.clear();
@@ -735,7 +735,7 @@ if(isMC_){
     }
 
   }
-
+*/
  // Muons collection starts
 
   edm::Handle<edm::View<pat::Muon> > muons;
@@ -850,8 +850,8 @@ if(isMC_){
                    delRL1_23 = deltaR(L1MuEta,L1MuPhi ,mu->eta(),mu->phi());
                    if (delRL1_23<temp2) temp2 = delRL1_23;
                 }
-                if(temp1<0.1) delRL1_7_toBeChecked=temp1;
-                if(temp2<0.1) delRL1_23_toBeChecked=temp2;
+                if(temp1<0.3) delRL1_7_toBeChecked=temp1;
+                if(temp2<0.3) delRL1_23_toBeChecked=temp2;
            }
          }  
        }
@@ -878,8 +878,8 @@ if(isMC_){
           if(mu_filters[1].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_Leg2 = true; }
           if(mu_filters[2].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_Leg1 = true; }
           if(mu_filters[3].Contains(filter) && foundTheLeg)  {filterMu17_Mu8_IsoLeg = true; }
-          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=12 && delRL1_7_toBeChecked < 0.1 )  {filterMu12_Ele23_legMu = true; }
-          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=23 && delRL1_23_toBeChecked < 0.1 ) {filterMu23_Ele12_legMu = true; }
+          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=12 && delRL1_7_toBeChecked < 0.3 )  {filterMu12_Ele23_legMu = true; }
+          if(mu_filters[1].Contains(filter) && foundTheLeg && legObjects[iteTrigObj].at(iPass).pt()>=23 && delRL1_23_toBeChecked < 0.3 ) {filterMu23_Ele12_legMu = true; }
      
        }
        passFilterIsoMu27       .push_back(filterIsoMu27);
