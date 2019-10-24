@@ -138,16 +138,26 @@ class Ntupler : public edm::EDAnalyzer {
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapTightToken_;
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP90Token_;
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP80Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWPLooseToken_;
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90Token_;
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
-     edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
-     edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
+
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapLoosev1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMediumv1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapTightv1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP90v1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP80v1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90v1Token_;
+     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80v1Token_;
+
+     //edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
+     //edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
+    // edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
+    // edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWPLooseToken_;
 
       // L1 Token
       edm::EDGetToken muToken;
-  
+      edm::EDGetToken egToken; 
+
      // Verbose output for ID
      bool isMC_;
      bool doEle_;
@@ -174,7 +184,11 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<std::string> triggerPath;
    
      // All Electron filters and variables
-   
+     std::vector<bool> passL1EG10;
+     std::vector<bool> passL1EG17;
+     std::vector<bool> passL1EG23;
+     std::vector<bool> passL1EG20Iso;
+     std::vector<bool> passL1EG23Iso;   
      std::vector<bool> passFilterEle35;
      std::vector<bool> passFilterEle23_12_leg1;
      std::vector<bool> passFilterEle23_12_leg2;
@@ -187,13 +201,21 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<bool> passEleIdTight_;
      std::vector<bool> passMVAnoIsoWP90_;
      std::vector<bool> passMVAnoIsoWP80_;
-     std::vector<bool> passMVAnoIsoWPLoose_;
      std::vector<bool> passMVAIsoWP90_;
      std::vector<bool> passMVAIsoWP80_;
+     std::vector<bool> passEleIdLoosev1_;
+     std::vector<bool> passEleIdMediumv1_;
+     std::vector<bool> passEleIdTightv1_;
+     std::vector<bool> passMVAnoIsoWP90v1_;
+     std::vector<bool> passMVAnoIsoWP80v1_;
+     std::vector<bool> passMVAIsoWP90v1_;
+     std::vector<bool> passMVAIsoWP80v1_;
+/*
      std::vector<bool> passMVAIsoWPLoose_;
      std::vector<float> valueMVAnoIso_;
      std::vector<float> valueMVAIso_;
-        
+     std::vector<bool> passMVAnoIsoWPLoose_;
+  */      
      // all electron variables
 
      Int_t nElectrons_;
@@ -201,6 +223,7 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<double> ele_eta_;
      std::vector<double> ele_etaSC_;
      std::vector<double> ele_phi_;
+     std::vector<double> ele_tricharge_;
      std::vector<double> ele_phiSC_;
      std::vector<double> ele_energy_;
      std::vector<double> ele_energySC_;
@@ -293,12 +316,21 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<int>      mu_InTimeMuon_;
      std::vector<int>      mu_MultiIsoLoose_;
      std::vector<int>      mu_MultiIsoMedium_;
-     std::vector<bool> passFilterIsoMu27;
+     std::vector<bool> passFilterIsoMu24;
      std::vector<bool> passFilterMu17_Mu8_leg1;
      std::vector<bool> passFilterMu17_Mu8_leg2;
      std::vector<bool> passFilterMu17_Mu8_IsoLeg;
      std::vector<bool> passFilterMu12_Ele23_legMu;
      std::vector<bool> passFilterMu23_Ele12_legMu;
+
+     std::vector<bool> passFilterMu12_Ele23_legMu_L10p5;
+     std::vector<bool> passFilterMu12_Ele23_legMu_L10p3;
+     std::vector<bool> passFilterMu23_Ele12_legMu_L10p5;
+     std::vector<bool> passFilterMu23_Ele12_legMu_L10p3;
+     std::vector<bool> passFilterMu12_L10p5;
+     std::vector<bool> passFilterMu12_L10p3;
+     std::vector<bool> passFilterMu23_L10p5;
+     std::vector<bool> passFilterMu23_L10p3;
 
      //Gen particles
      unsigned int   genParticles_n;

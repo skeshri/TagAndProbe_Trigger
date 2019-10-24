@@ -9,7 +9,7 @@ process.load("Configuration.StandardSequences.GeometryRecoDB_cff")
 
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 
-process.MessageLogger.cerr.FwkReport.reportEvery = 10000
+process.MessageLogger.cerr.FwkReport.reportEvery = 1
 
 # NOTE: the pick the right global tag!
 #    for Spring15 50ns MC: global tag is 'auto:run2_mc_50'
@@ -26,7 +26,7 @@ from Configuration.AlCa.GlobalTag import GlobalTag
 #
 # Define input data to read
 #
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(50000) )
 
 
 
@@ -43,8 +43,7 @@ inputFilesAOD = cms.untracked.vstring(
 
 inputFilesMiniAOD = cms.untracked.vstring(
 'root://cms-xrd-global.cern.ch//store/data/Run2017B/SingleElectron/MINIAOD/31Mar2018-v1/90000/FC89D712-AF37-E811-AD13-008CFAC93F84.root'
-#'root://cms-xrd-global.cern.ch//store/mc/RunIIFall17MiniAOD/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PU2017_94X_mc2017_realistic_v11_ext1-v1/920000/76190FD4-93A5-E811-AA90-A4BF0107E164.root'
-#'root://cms-xrd-global.cern.ch//store/data/Run2017B/MuonEG/MINIAOD/12Sep2017-v1/100000/0423E958-32A3-E711-94AF-1CC1DE1D0AD4.root'
+
     )
 #
 # You can list here either AOD or miniAOD files, but not both types mixed
@@ -80,11 +79,25 @@ my_id_modules = ['RecoEgamma.ElectronIdentification.Identification.cutBasedElect
                  'RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Fall17_94X_V1_cff',
 		 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V1_cff',
 		 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V1_cff',
+		 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_noIso_V2_cff',
+		 'RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V2_cff',
 ]
 
 #add them to the VID producer
 for idmod in my_id_modules:
     setupAllVIDIdsInModule(process,idmod,setupVIDElectronSelection)
+
+process.minPtLeptons = cms.EDFilter("PtMinCandViewSelector",
+#    src = cms.InputTag("slimmedMuons"),
+    src = cms.InputTag("slimmedElectrons"),
+    ptMin = cms.double(9)
+  )
+
+process.atLeastTwoLeptons = cms.EDFilter("CandViewCountFilter",
+                                       src = cms.InputTag("minPtLeptons"),
+                                       minNumber = cms.uint32(2)
+                                       )
+
 #
 # Configure the ntupler module
 #
@@ -145,32 +158,38 @@ process.ntupler = cms.EDAnalyzer('Ntupler',
 			         prescale = cms.InputTag("patTrigger"),
                                  objects = cms.InputTag('slimmedPatTrigger'),
                                  # Effective areas for computing PU correction for isolations
+                                 effAreasConfigFile = cms.FileInPath("RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_94X.txt"),
 				#effAreasConfigFile = cms.FileInPath("RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_92X.txt"),
                                  #effAreasConfigFile = cms.FileInPath("RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_94X.txt"),
-                                 effAreasConfigFile = cms.FileInPath("RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_92X.txt"),
+#                                 effAreasConfigFile = cms.FileInPath("RecoEgamma/ElectronIdentification/data/Fall17/effAreaElectrons_cone03_pfNeuHadronsAndPhotons_92X.txt"),
                                  # ID decisions (common to all formats)
                                  #
                                  # all IDs listed below are available given the content of "my_id_modules" defined above.
                                  # only one is exercised for this example.
                                  #
                              
-                                  #eleIdMapLoose = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-loose"),
-                                  #eleIdMapMedium = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium"),
-                                  #eleIdMapTight = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-tight"),
-                                  eleIdMapLoose = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-loose"),
-                                  eleIdMapMedium = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-medium"),
-                                  eleIdMapTight = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-tight"),
-				  eleMVA90noIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90'),
-				  eleMVA80noIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80'),
-				  eleMVALoosenoIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wpLoose'),
-				  eleMVA90Iso    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90'),
-				  eleMVA80Iso    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp80'),
-				  eleMVALooseIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose'),
-				  eleMVAValuesMapTokenIso = cms.InputTag('electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV1Values'),		
-				  eleMVAValuesMapTokenNoIso = cms.InputTag('electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values'),	
+                                  eleIdMapLoose = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-loose"),
+                                  eleIdMapMedium = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium"),
+                                  eleIdMapTight = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-tight"),
+                                  eleIdMapLoosev1 = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-loose"),
+                                  eleIdMapMediumv1 = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-medium"),
+                                  eleIdMapTightv1 = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-tight"),
+				  eleMVA90noIsov1 =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90'),
+				  eleMVA90noIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90'),
+				  eleMVA80noIsov1 =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80'),
+				  eleMVA80noIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80'),
+				  eleMVA90Isov1    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90'),
+				  eleMVA90Iso    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp90'),
+				  eleMVA80Isov1    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp80'),
+				  eleMVA80Iso    =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp80'),
+				  eleMVALoosenoIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wpLoose'),
+				  eleMVALooseIso =  cms.InputTag('egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wpLoose'),
+				 # eleMVAValuesMapTokenIso = cms.InputTag('electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV1Values'),		
+				  #eleMVAValuesMapTokenNoIso = cms.InputTag('electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values'),	
                                   muInputTag = cms.InputTag("gmtStage2Digis","Muon","RECO"),
+                                  egInputTag = cms.InputTag("caloStage2Digis","EGamma","RECO"),
                                  isMC = cms.bool(False),
-                                 doMuon = cms.bool(True),
+                                 doMuon = cms.bool(False),
                                  doEle = cms.bool(True)
 
                                  )
@@ -180,4 +199,6 @@ process.TFileService = cms.Service("TFileService",
                                    )
 
 
-process.p = cms.Path(process.egmGsfElectronIDSequence * process.ntupler)
+#process.p = cms.Path(process.egmGsfElectronIDSequence * process.ntupler)
+process.p = cms.Path(process.egmGsfElectronIDSequence * process.minPtLeptons * process.atLeastTwoLeptons * process.ntupler)
+

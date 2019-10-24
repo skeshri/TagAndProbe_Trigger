@@ -1,5 +1,4 @@
-
-name = 'ElectronNtuple_HWW_2017_fixed_v2_92X'
+name = 'SingleEle_2017_v7'
 
 dataset = {
    'Run2017B' : '/SingleElectron/Run2017B-31Mar2018-v1/MINIAOD',
@@ -27,6 +26,7 @@ listOfSamples = [
    'Run2017F',        
    ]
 
+
 if __name__ == '__main__':
 
    from CRABClient.UserUtilities import config
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
    config.General.workArea = 'crab_'+name
    config.General.transferLogs = False
-
+   config.JobType.allowUndistributedCMSSW = True
    config.JobType.pluginName = 'Analysis'
    config.JobType.psetName = 'runNtupler.py'
    config.JobType.outputFiles = ['TnP_ntuple.root']
@@ -50,9 +50,9 @@ if __name__ == '__main__':
    config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt'
    config.Data.publication = False
    config.Data.totalUnits = -1
-   config.Data.outLFNDirBase = '/store/user/skeshri/' + name
+   config.Data.outLFNDirBase = '/store/group/phys_higgs/cmshww/arun/TriggerEff_RunIILegacy/' + name
 
-   config.Site.storageSite = 'T2_IN_TIFR'
+   config.Site.storageSite = 'T2_CH_CERN'
  #  config.Site.blacklist = ['T2_BR_SPRACE', 'T2_US_Wisconsin', 'T1_RU_JINR', 'T2_RU_JINR', 'T2_EE_Estonia']
 
    listOfSamples.reverse()
