@@ -141,19 +141,6 @@ class Ntupler : public edm::EDAnalyzer {
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90Token_;
      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80Token_;
 
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapLoosev1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMediumv1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapTightv1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP90v1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP80v1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90v1Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80v1Token_;
-
-     //edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
-     //edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
-    // edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
-    // edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWPLooseToken_;
-
       // L1 Token
       edm::EDGetToken muToken;
       edm::EDGetToken egToken; 
@@ -189,7 +176,11 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<bool> passL1EG23;
      std::vector<bool> passL1EG20Iso;
      std::vector<bool> passL1EG23Iso;   
-     std::vector<bool> passFilterEle35;
+     std::vector<bool> passFilterEle32;
+     std::vector<bool> passFilterEle115;
+     std::vector<bool> passFilterEle50;
+     std::vector<bool> passFilterEle27;
+     std::vector<bool> passFilterEle25;
      std::vector<bool> passFilterEle23_12_leg1;
      std::vector<bool> passFilterEle23_12_leg2;
      std::vector<bool> passFilterMu12_Ele23_legEle;
@@ -203,19 +194,7 @@ class Ntupler : public edm::EDAnalyzer {
      std::vector<bool> passMVAnoIsoWP80_;
      std::vector<bool> passMVAIsoWP90_;
      std::vector<bool> passMVAIsoWP80_;
-     std::vector<bool> passEleIdLoosev1_;
-     std::vector<bool> passEleIdMediumv1_;
-     std::vector<bool> passEleIdTightv1_;
-     std::vector<bool> passMVAnoIsoWP90v1_;
-     std::vector<bool> passMVAnoIsoWP80v1_;
-     std::vector<bool> passMVAIsoWP90v1_;
-     std::vector<bool> passMVAIsoWP80v1_;
-/*
-     std::vector<bool> passMVAIsoWPLoose_;
-     std::vector<float> valueMVAnoIso_;
-     std::vector<float> valueMVAIso_;
-     std::vector<bool> passMVAnoIsoWPLoose_;
-  */      
+
      // all electron variables
 
      Int_t nElectrons_;

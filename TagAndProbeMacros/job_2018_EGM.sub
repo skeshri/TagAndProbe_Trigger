@@ -1,0 +1,7 @@
+executable =  run.sh
+arguments  = $(ClusterId)$(ProcId)
+output     = output/batch_tnp.$(ClusterId).$(ProcId).out
+error      = error/batch_tnp.$(ClusterId).$(ProcId).err
+log        = log/batch_tnp.$(ClusterId).log
++JobFlavour = "longlunch"
+queue

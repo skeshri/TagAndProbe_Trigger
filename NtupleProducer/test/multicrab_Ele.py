@@ -1,29 +1,27 @@
-name = 'SingleEle_2017_v7'
+name = 'DYEE_Run3_v1'
 
 dataset = {
-   'Run2017B' : '/SingleElectron/Run2017B-31Mar2018-v1/MINIAOD',
-   'Run2017C' : '/SingleElectron/Run2017C-31Mar2018-v1/MINIAOD', 
-   'Run2017D' : '/SingleElectron/Run2017D-31Mar2018-v1/MINIAOD', 
-   'Run2017E' : '/SingleElectron/Run2017E-31Mar2018-v1/MINIAOD', 
-   'Run2017F' : '/SingleElectron/Run2017F-31Mar2018-v1/MINIAOD', 
+   #'DY2021' : '/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/Run3Summer19MiniAOD-2021Scenario_106X_mcRun3_2021_realistic_v3-v2/MINIAODSIM',
+   'DY2021_incl' : '/DYJets_incl_MLL-50_TuneCP5_14TeV-madgraphMLM-pythia8/Run3Summer19MiniAOD-2021Scenario_106X_mcRun3_2021_realistic_v3-v1/MINIAODSIM',
+  # 'DY2023' : '/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/Run3Summer19MiniAOD-2023Scenario_106X_mcRun3_2023_realistic_v3-v2/MINIAODSIM', 
+   'DY2023_incl' : '/DYJets_incl_MLL-50_TuneCP5_14TeV-madgraphMLM-pythia8/Run3Summer19MiniAOD-2023Scenario_106X_mcRun3_2023_realistic_v3-v1/MINIAODSIM', 
    }
 
 
 #nevents = -1 
-lumisPerJob = {
-   'Run2017B':        100,
-   'Run2017C':        100,
-   'Run2017D':        100,
-   'Run2017E':        100,
-   'Run2017F':        100,
-   }
+#lumisPerJob = {
+#   'Run2017B':        100,
+#   'Run2017C':        100,
+#   'Run2017D':        100,
+#   'Run2017E':        100,
+#   'Run2017F':        100,
+#   }
 
 listOfSamples = [
-   'Run2017B',        
-   'Run2017C',        
-   'Run2017D',        
-   'Run2017E',        
-   'Run2017F',        
+   #'DY2021',        
+   'DY2021_incl',        
+  # 'DY2023',        
+   'DY2023_incl',        
    ]
 
 
@@ -40,17 +38,18 @@ if __name__ == '__main__':
 
    config.General.workArea = 'crab_'+name
    config.General.transferLogs = False
+   config.General.transferOutputs = True
    config.JobType.allowUndistributedCMSSW = True
    config.JobType.pluginName = 'Analysis'
    config.JobType.psetName = 'runNtupler.py'
    config.JobType.outputFiles = ['TnP_ntuple.root']
 
    config.Data.inputDBS = 'global'
-   config.Data.splitting = 'LumiBased'
-   config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt'
+   config.Data.splitting = 'Automatic'
+#   config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt'
    config.Data.publication = False
    config.Data.totalUnits = -1
-   config.Data.outLFNDirBase = '/store/group/phys_higgs/cmshww/arun/TriggerEff_RunIILegacy/' + name
+   config.Data.outLFNDirBase = '/store/group/phys_egamma/arun/TriggerEff_Run3/' + name
 
    config.Site.storageSite = 'T2_CH_CERN'
  #  config.Site.blacklist = ['T2_BR_SPRACE', 'T2_US_Wisconsin', 'T1_RU_JINR', 'T2_RU_JINR', 'T2_EE_Estonia']
@@ -60,7 +59,7 @@ if __name__ == '__main__':
 
       config.General.requestName = sample
       config.Data.inputDataset = dataset[sample]
-      config.Data.unitsPerJob = lumisPerJob[sample]
+#      config.Data.unitsPerJob = lumisPerJob[sample]
       config.Data.outputDatasetTag = sample
       p = Process(target=submit, args=(config,))
       p.start()
