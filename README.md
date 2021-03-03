@@ -4,14 +4,14 @@ Although the macros works for all years.
 
 `cmsrel CMSSW_10_6_20`  
 `cd CMSSW_10_6_20/src`  
-`cmsenv` 
-`git clone git@github.com:arunhep/TagAndProbe_Trigger.git`
-`git checkout EGMHLT_run3`
-`scramv1 b`
+`cmsenv`  
+`git clone git@github.com:arunhep/TagAndProbe_Trigger.git` 
+`git checkout EGMHLT_run3` 
+`scramv1 b` 
 
 ## For Test Run (check the input file and triggers)
 
-`cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test`
+`cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test` 
 `cmsRun runNtupler.py`  
 
 ## For crab job submission (check the paths etc in the file)
@@ -20,5 +20,5 @@ Although the macros works for all years.
 
 ### Macros to produce the plots
 
-`cd TagAndProbe_Trigger/TagAndProbeMacros`
+`cd TagAndProbe_Trigger/TagAndProbeMacros` 
 `./run.sh` 
