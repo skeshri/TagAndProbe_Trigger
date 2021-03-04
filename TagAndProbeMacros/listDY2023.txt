@@ -1,5 +1,0 @@
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYEE_Run3_v1/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/DY2023/210301_180838/0000/TnP_ntuple_1.root
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYEE_Run3_v1/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/DY2023/210301_180838/0000/TnP_ntuple_4.root
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYEE_Run3_v1/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/DY2023/210301_180838/0000/TnP_ntuple_2.root
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYEE_Run3_v1/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/DY2023/210301_180838/0000/TnP_ntuple_5.root
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYEE_Run3_v1/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/DY2023/210301_180838/0000/TnP_ntuple_3.root

@@ -1,10 +1,8 @@
-name = 'DYEE_Run3_v1'
+name = 'Winter20_110X'
 
 dataset = {
-   #'DY2021' : '/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/Run3Summer19MiniAOD-2021Scenario_106X_mcRun3_2021_realistic_v3-v2/MINIAODSIM',
-   'DY2021_incl' : '/DYJets_incl_MLL-50_TuneCP5_14TeV-madgraphMLM-pythia8/Run3Summer19MiniAOD-2021Scenario_106X_mcRun3_2021_realistic_v3-v1/MINIAODSIM',
-  # 'DY2023' : '/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/Run3Summer19MiniAOD-2023Scenario_106X_mcRun3_2023_realistic_v3-v2/MINIAODSIM', 
-   'DY2023_incl' : '/DYJets_incl_MLL-50_TuneCP5_14TeV-madgraphMLM-pythia8/Run3Summer19MiniAOD-2023Scenario_106X_mcRun3_2023_realistic_v3-v1/MINIAODSIM', 
+   'DYEE' : '/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v1/MINIAODSIM',
+   'ZprimeEE' : '/ZprimeToEE_M-6000_TuneCP5_14TeV-pythia8/Run3Winter20DRMiniAOD-FlatPU0to80_110X_mcRun3_2021_realistic_v6-v3/MINIAODSIM',
    }
 
 
@@ -18,10 +16,8 @@ dataset = {
 #   }
 
 listOfSamples = [
-   #'DY2021',        
-   'DY2021_incl',        
-  # 'DY2023',        
-   'DY2023_incl',        
+   'DYEE',        
+   'ZprimeEE',        
    ]
 
 

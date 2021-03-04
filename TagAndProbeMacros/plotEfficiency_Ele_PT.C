@@ -2,7 +2,7 @@ void plotEfficiency_Ele_PT(TString triggerFile){
 
 TFile *f1 = TFile::Open("DY2018_PT_eff_tightid_nominal.root");
 TFile *f2 = TFile::Open("DY2021_PT_eff_tightid_nominal.root");
-TFile *f3 = TFile::Open("DY2023_PT_eff_tightid_nominal.root");
+TFile *f3 = TFile::Open("DY2021_PT_eff_tightid_nominal.root");
 
 
      ifstream inFile;
@@ -45,7 +45,7 @@ TFile *f3 = TFile::Open("DY2023_PT_eff_tightid_nominal.root");
 
   mg->Add(gra_2018A);
   mg->Add(gra_2018B);
-  mg->Add(gra_2018C);
+//  mg->Add(gra_2018C);
 
 
   gra_2018A->SetLineColor(1);
@@ -75,7 +75,7 @@ TFile *f3 = TFile::Open("DY2023_PT_eff_tightid_nominal.root");
    TLegend *legend = new TLegend(0.5,0.3,0.7,0.5);
    legend->AddEntry(gra_2018A,"2018","p");
    legend->AddEntry(gra_2018B,"2021","p");
-   legend->AddEntry(gra_2018C,"2023","p");
+  // legend->AddEntry(gra_2018C,"2023","p");
    legend->Draw();
 
   TString pngFileName = trigger_name.Data() ;

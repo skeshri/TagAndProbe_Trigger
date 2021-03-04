@@ -2,7 +2,7 @@ void plotEfficiency_Ele_PU(TString triggerFile){
 
 TFile *f1 = TFile::Open("DY2018_PU_eff_tightid_nominal.root");
 TFile *f2 = TFile::Open("DY2021_PU_eff_tightid_nominal.root");
-TFile *f3 = TFile::Open("DY2023_PU_eff_tightid_nominal.root");
+TFile *f3 = TFile::Open("DY2021_PU_eff_tightid_nominal.root");
 
      ifstream inFile;
      inFile.open(triggerFile.Data());
@@ -48,7 +48,7 @@ cout << "h_total_2018C = " << h_total_2018C->Integral() << "h_pass_2018C = " << 
 
   mg->Add(gra_2018A);
   mg->Add(gra_2018B);
-  mg->Add(gra_2018C);
+//  mg->Add(gra_2018C);
 
 
   gra_2018A->SetLineColor(1);
@@ -78,7 +78,7 @@ cout << "h_total_2018C = " << h_total_2018C->Integral() << "h_pass_2018C = " << 
    TLegend *legend = new TLegend(0.5,0.3,0.7,0.5);
    legend->AddEntry(gra_2018A,"2018","p");
    legend->AddEntry(gra_2018B,"2021","p");
-   legend->AddEntry(gra_2018C,"2023","p");
+//   legend->AddEntry(gra_2018C,"2023","p");
    legend->Draw();
 
   TString pngFileName = trigger_name.Data() ;

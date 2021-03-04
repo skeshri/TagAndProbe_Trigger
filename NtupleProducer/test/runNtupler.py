@@ -45,7 +45,8 @@ inputFilesMiniAOD = cms.untracked.vstring(
 #'root://cms-xrd-global.cern.ch//store/data/Run2017B/SingleElectron/MINIAOD/31Mar2018-v1/90000/FC89D712-AF37-E811-AD13-008CFAC93F84.root'
 #'root://cms-xrd-global.cern.ch//store/mc/Run3Summer19MiniAOD/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/MINIAODSIM/2021Scenario_106X_mcRun3_2021_realistic_v3-v2/270000/087644E5-95DB-E24C-B7A9-81646685DBA9.root'
 #'root://cms-xrd-global.cern.ch//store/mc/Run3Summer19MiniAOD/DYToEE_M-50_NNPDF31_TuneCP5_14TeV-powheg-pythia8/MINIAODSIM/2023Scenario_106X_mcRun3_2023_realistic_v3-v2/260000/007DAFDA-8CA6-504C-A54C-4479B4E75DFF.root'
-'file:DY2023.root'
+#'file:DY2023.root'
+'root://cms-xrd-global.cern.ch//store/mc/Run3Winter20DRPremixMiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/110X_mcRun3_2021_realistic_v6-v1/60000/02F993F1-A40E-7048-90EE-E0941D52577D.root'
     )
 #
 # You can list here either AOD or miniAOD files, but not both types mixed

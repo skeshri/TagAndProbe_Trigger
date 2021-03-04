@@ -33,7 +33,10 @@ for(int i=0; i<systematicVar.size();i++)
    cout<<systematicVar.at(i).Data()<<endl;
    cout<<" ptTag : "<<ptTag<<" , zMassL : "<<zMassL<<" , zMassR : "<<zMassR<<endl;
    output +="_PT_eff_";
-   output +="tightid_";
+   //output +="tightid_";
+   //output +="mediumid_";
+   //output +="mvawp90id_";
+   output +="mvawp80id_";
    output += systematicVar.at(i);
    output +=".root";
 
@@ -168,15 +171,16 @@ double sieie = ele_full5x5_sigmaIetaIeta->at(i);
 double eInvMinusPInv = ele_ooEmooP->at(i);
 bool convVeto = ele_passConversionVeto->at(i);
 double relIso = ele_relCombIsoWithEA->at(i);
-mvaid = passMVAIsoWP90->at(i);
+//mvaid = passMVAIsoWP90->at(i);
+mvaid = passMVAIsoWP80->at(i);
 tightid = passEleIdTight->at(i);
 mediumid = passEleIdMedium->at(i);
 
 if(fabs(eta) < 1.479){    // Barrel
 //if (!convVeto) return false;
 //if (relIso >= 0.06) return false;
-//if (!mvaid) return false;
-if (!tightid) return false;
+if (!mvaid) return false;
+//if (!tightid) return false;
 //if (!mediumid) return false;
 if (fabs(ele_d0->at(i))>=0.05) return false;
 if (fabs(ele_dz->at(i))>=0.1) return false;
@@ -187,8 +191,8 @@ else{
 //if (fabs(eInvMinusPInv) >= 0.014) return false;
 //if (!convVeto) return false;
 //if (relIso >= 0.06) return false;
-//if (!mvaid) return false;
-if (!tightid) return false;
+if (!mvaid) return false;
+//if (!tightid) return false;
 //if (!mediumid) return false;
 if (fabs(ele_d0->at(i))>=0.1) return false;
 if (fabs(ele_dz->at(i))>=0.2) return false;
