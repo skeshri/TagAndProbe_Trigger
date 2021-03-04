@@ -128,6 +128,12 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig):
 
   tree_->Branch("genWeight"    ,  &genWeight_ , "genWeight/F");
 
+  tree_->Branch("genParticles_n" ,  &genParticles_n);
+  tree_->Branch("genElectron_pt" ,  &genElectron_pt);
+  tree_->Branch("genElectron_eta" ,  &genElectron_eta);
+  tree_->Branch("genElectron_phi" ,  &genElectron_phi);
+  tree_->Branch("genElectron_energy" ,  &genElectron_energy);
+  tree_->Branch("genElectron_fromZ" ,  &genElectron_fromZ);
 
   tree_->Branch("nEle"    ,  &nElectrons_ , "nEle/I");
   tree_->Branch("ele_pt"    ,  &ele_pt_    );
@@ -272,6 +278,8 @@ if(doMuon_) {
   tree_->Branch("passFilterMu12_L10p3" ,  &passFilterMu12_L10p3);
   tree_->Branch("passFilterMu23_L10p5" ,  &passFilterMu23_L10p5);
   tree_->Branch("passFilterMu23_L10p3" ,  &passFilterMu23_L10p3); 
+
+
 }
 }
 
@@ -728,6 +736,53 @@ bool L1EG10(false), L1EG17(false), L1EG23(false), L1EG20Iso(false), L1EG23Iso(fa
 
    }
  }
+
+
+if(isMC_){
+    genElectron_pt.clear();
+    genElectron_eta.clear();
+    genElectron_phi.clear();
+    genElectron_energy.clear();
+    genElectron_fromZ.clear();
+  //  genMuon_pt.clear();
+  //  genMuon_eta.clear();
+  //  genMuon_phi.clear();
+  //  genMuon_energy.clear();
+  //  genMuon_fromZ.clear();
+    genParticles_n = genParticles->size();
+    for (unsigned int iteGen = 0 ; iteGen < genParticles_n ; iteGen++){   
+       reco::GenParticle genPart = (*genParticles)[iteGen];
+       reco::GenParticle genElectron;
+       bool fromZ_ele = false;
+       if(abs(genPart.pdgId())==11){ 
+          genElectron = genPart;
+            if(genElectron.pt()>5) {
+	       genElectron_pt.push_back(genElectron.pt());
+	       genElectron_eta.push_back(genElectron.eta());
+	       genElectron_phi.push_back(genElectron.phi());
+	       genElectron_energy.push_back(genElectron.energy());
+               if (hasWZasMother(genElectron))fromZ_ele = true;
+               genElectron_fromZ.push_back(fromZ_ele);
+               } 
+	}
+/*
+       reco::GenParticle  genMuon; 
+       bool fromZ_mu = false;
+       if(abs(genPart.pdgId())==13){ 
+          genMuon = genPart;
+            if(genMuon.pt()>5) {
+	       genMuon_pt.push_back(genMuon.pt());
+	       genMuon_eta.push_back(genMuon.eta());
+	       genMuon_phi.push_back(genMuon.phi());
+	       genMuon_energy.push_back(genMuon.energy());
+               if (hasWZasMother(genMuon)) fromZ_mu=true;
+               genMuon_fromZ.push_back(fromZ_mu);
+               } 
+	}
+*/
+    }
+
+  }
 
  // Muons collection starts
 

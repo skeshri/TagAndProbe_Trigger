@@ -1,4 +1,4 @@
-name = 'Winter20_110X'
+name = 'Winter20_110X_v2'
 
 dataset = {
    'DYEE' : '/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v1/MINIAODSIM',
