@@ -1,0 +1,1 @@
+/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/DYLL_Run2_v2/ZprimeToEE_M-4000_TuneCP5_13TeV-pythia8/Zprime2018/210304_104134/0000/TnP_ntuple_1.root
