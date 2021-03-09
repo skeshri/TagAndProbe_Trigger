@@ -33,10 +33,10 @@ for(int i=0; i<systematicVar.size();i++)
    cout<<systematicVar.at(i).Data()<<endl;
    cout<<" ptTag : "<<ptTag<<" , zMassL : "<<zMassL<<" , zMassR : "<<zMassR<<endl;
    output +="_PT_eff_";
-   //output +="tightid_";
+   output +="tightid_";
    //output +="mediumid_";
    //output +="mvawp90id_";
-   output +="mvawp80id_";
+//   output +="mvawp80id_";
    output += systematicVar.at(i);
    output +=".root";
 
@@ -138,6 +138,14 @@ for(int i=0; i<systematicVar.size();i++)
 
       if (Z_candLV.M()<zMassL || Z_candLV.M() > zMassR) continue;
 
+      if(!(genElectron_fromZ->at(0) == 1 && genElectron_fromZ->at(1) == 1)) continue; 
+      
+
+//std::cout << "size of genElectron_fromZ = " << genElectron_fromZ->size() << std::endl;
+//     for(int k = 0; k <genElectron_fromZ->size() ; k++){
+//std::cout << "genElectron_fromZ = " << genElectron_fromZ->at(k) << std::endl;
+//}
+//cout << " ************************ Event Loop *********************" << endl;
 
       h_Ele25_pt_total->Fill(ele_pt->at(second));
       h_Ele27_pt_total->Fill(ele_pt->at(second));
@@ -179,8 +187,8 @@ mediumid = passEleIdMedium->at(i);
 if(fabs(eta) < 1.479){    // Barrel
 //if (!convVeto) return false;
 //if (relIso >= 0.06) return false;
-if (!mvaid) return false;
-//if (!tightid) return false;
+//if (!mvaid) return false;
+if (!tightid) return false;
 //if (!mediumid) return false;
 if (fabs(ele_d0->at(i))>=0.05) return false;
 if (fabs(ele_dz->at(i))>=0.1) return false;
@@ -191,8 +199,8 @@ else{
 //if (fabs(eInvMinusPInv) >= 0.014) return false;
 //if (!convVeto) return false;
 //if (relIso >= 0.06) return false;
-if (!mvaid) return false;
-//if (!tightid) return false;
+//if (!mvaid) return false;
+if (!tightid) return false;
 //if (!mediumid) return false;
 if (fabs(ele_d0->at(i))>=0.1) return false;
 if (fabs(ele_dz->at(i))>=0.2) return false;

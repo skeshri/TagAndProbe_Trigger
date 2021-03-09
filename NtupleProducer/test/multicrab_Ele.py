@@ -3,6 +3,8 @@ name = 'Winter20_110X_v2'
 dataset = {
    'DYEE' : '/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v1/MINIAODSIM',
    'ZprimeEE' : '/ZprimeToEE_M-6000_TuneCP5_14TeV-pythia8/Run3Winter20DRMiniAOD-FlatPU0to80_110X_mcRun3_2021_realistic_v6-v3/MINIAODSIM',
+   'TTSemilep' : '/TTToSemiLeptonic_TuneCP5_14TeV-powheg-pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/MINIAODSIM',
+   'QCD' : '/QCD_Pt-15to3000_TuneCP5_Flat_14TeV_pythia8_HCAL/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v1/MINIAODSIM',
    }
 
 
@@ -16,8 +18,10 @@ dataset = {
 #   }
 
 listOfSamples = [
-   'DYEE',        
-   'ZprimeEE',        
+  # 'DYEE',        
+  # 'ZprimeEE',        
+    'TTSemilep',
+    'QCD',
    ]
 
 

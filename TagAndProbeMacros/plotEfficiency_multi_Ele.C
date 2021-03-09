@@ -1,17 +1,21 @@
 void plotEfficiency_multi_Ele(TString triggerFile){
 
-//TFile *f1 = TFile::Open("DY2018_PT_eff_tightid_nominal.root");
+TFile *f1 = TFile::Open("DY2018_PHI_eff_tightid_nominal.root");
+TFile *f2 = TFile::Open("DY2021_PHI_eff_tightid_nominal.root");
+//TFile *f1 = TFile::Open("rootFiles/DY2018_PT_eff_tightid_nominal.root");
+//TFile *f2 = TFile::Open("DY2018Genmatched_PT_eff_tightid_nominal.root");
 //TFile *f2 = TFile::Open("DY2021_PT_eff_tightid_nominal.root");
 
 
-//TFile *f1 = TFile::Open("DY2018_ETA_eff_tightid_nominal.root");
+//TFile *f1 = TFile::Open("rootFiles/DY2018_ETA_eff_tightid_nominal.root");
+//TFile *f2 = TFile::Open("DY2018Genmatched_ETA_eff_tightid_nominal.root");
 //TFile *f2 = TFile::Open("DY2021_ETA_eff_tightid_nominal.root");
 
 //TFile *f1 = TFile::Open("DY2018_PU_eff_tightid_nominal.root");
 //TFile *f2 = TFile::Open("DY2021_PU_eff_tightid_nominal.root");
 
-TFile *f1 = TFile::Open("Zprime2018_efficiency_tightid_nominal.root");
-TFile *f2 = TFile::Open("Zprime2021_efficiency_tightid_nominal.root");
+//TFile *f1 = TFile::Open("Zprime2018_efficiency_tightid_nominal.root");
+//TFile *f2 = TFile::Open("Zprime2021_efficiency_tightid_nominal.root");
 
      ifstream inFile;
      inFile.open(triggerFile.Data());
@@ -85,6 +89,7 @@ cout << "total =  " << h_total_2018A->GetBinContent(i) << "  " << "pass = " <<  
 
    TLegend *legend = new TLegend(0.5,0.3,0.7,0.5);
    legend->AddEntry(gra_2018A,"2018","p");
+   //legend->AddEntry(gra_2018B,"2018 genmatched","p");
    legend->AddEntry(gra_2018B,"2021","p");
    legend->Draw();
 
@@ -117,7 +122,7 @@ TPad *pad2 = new TPad("pad2","pad2",0,0,1,0.2);
   h3->SetMaximum(1.1);
   h3->SetTitle("");
   h3->GetXaxis()->SetTitle("");
-  h3->GetYaxis()->SetTitle("2021/2018");
+  h3->GetYaxis()->SetTitle("gematched/2018");
   h3->GetXaxis()->SetTitleOffset(1.3);
   h3->GetXaxis()->SetLabelSize(0.033*yscale);
   h3->GetXaxis()->SetTitleSize(0.036*yscale);
@@ -130,7 +135,8 @@ TPad *pad2 = new TPad("pad2","pad2",0,0,1,0.2);
 
 
   TString pngFileName = trigger_name.Data() ;
-  pngFileName +=  "_efficiency_highPT.png";
+  //pngFileName +=  "_efficiency_genmatch.png";
+  pngFileName +=  "_efficiency.png";
   c->SaveAs(pngFileName.Data());
   c->Clear();
 

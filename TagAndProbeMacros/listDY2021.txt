@@ -1,1 +1,1 @@
-/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/Winter20_110X/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/DYEE/210303_193524/0000/TnP_ntuple_1.root
+/eos/cms/store/group/phys_egamma/arun/TriggerEff_Run3/Winter20_110X_v2/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/DYEE/210304_210028/0000/TnP_ntuple_1.root

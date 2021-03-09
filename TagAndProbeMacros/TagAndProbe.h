@@ -38,6 +38,12 @@ public :
    Int_t           nPUTrue;
    Float_t         rho;
    Float_t         genWeight;
+   UInt_t          genParticles_n;
+   vector<double>  *genElectron_pt;
+   vector<double>  *genElectron_eta;
+   vector<double>  *genElectron_phi;
+   vector<double>  *genElectron_energy;
+   vector<bool>    *genElectron_fromZ;
    Int_t           nEle;
    vector<double>  *ele_pt;
    vector<double>  *ele_eta;
@@ -101,6 +107,12 @@ public :
    TBranch        *b_nPUTrue;   //!
    TBranch        *b_rho;   //!
    TBranch        *b_genWeight;   //!
+   TBranch        *b_genParticles_n;   //!
+   TBranch        *b_genElectron_pt;   //!
+   TBranch        *b_genElectron_eta;   //!
+   TBranch        *b_genElectron_phi;   //!
+   TBranch        *b_genElectron_energy;   //!
+   TBranch        *b_genElectron_fromZ;   //!
    TBranch        *b_nEle;   //!
    TBranch        *b_ele_pt;   //!
    TBranch        *b_ele_eta;   //!
@@ -225,6 +237,11 @@ void TagAndProbe::Init(TTree *tree)
 
    // Set object pointer
    ele_pt = 0;
+   genElectron_pt = 0;
+   genElectron_eta = 0;
+   genElectron_phi = 0;
+   genElectron_energy = 0;
+   genElectron_fromZ = 0;
    ele_eta = 0;
    ele_etaSC = 0;
    ele_phi = 0;
@@ -290,6 +307,12 @@ void TagAndProbe::Init(TTree *tree)
    fChain->SetBranchAddress("nPUTrue", &nPUTrue, &b_nPUTrue);
    fChain->SetBranchAddress("rho", &rho, &b_rho);
    fChain->SetBranchAddress("genWeight", &genWeight, &b_genWeight);
+   fChain->SetBranchAddress("genParticles_n", &genParticles_n, &b_genParticles_n);
+   fChain->SetBranchAddress("genElectron_pt", &genElectron_pt, &b_genElectron_pt);
+   fChain->SetBranchAddress("genElectron_eta", &genElectron_eta, &b_genElectron_eta);
+   fChain->SetBranchAddress("genElectron_phi", &genElectron_phi, &b_genElectron_phi);
+   fChain->SetBranchAddress("genElectron_energy", &genElectron_energy, &b_genElectron_energy);
+   fChain->SetBranchAddress("genElectron_fromZ", &genElectron_fromZ, &b_genElectron_fromZ);
    fChain->SetBranchAddress("nEle", &nEle, &b_nEle);
    fChain->SetBranchAddress("ele_pt", &ele_pt, &b_ele_pt);
    fChain->SetBranchAddress("ele_eta", &ele_eta, &b_ele_eta);

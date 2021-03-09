@@ -129,6 +129,8 @@ for(int i=0; i<systematicVar.size();i++)
 
       if (Z_candLV.M()<zMassL || Z_candLV.M() > zMassR) continue;
 
+      if(!(genElectron_fromZ->at(0) == 1 && genElectron_fromZ->at(1) == 1)) continue;
+
 
       if(ele_pt->at(second)>33)h_Ele25_eta_total->Fill(ele_etaSC->at(second));
       if(ele_pt->at(second)>35)h_Ele27_eta_total->Fill(ele_etaSC->at(second));
