@@ -306,9 +306,24 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   using namespace reco;
   
 
-  TString ele_filters[9] = {"hltEle32WPTightGsfTrackIsoFilter","hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter","hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter","hltEle115CaloIdVTGsfTrkIdTGsfDphiFilter","hltEle50CaloIdVTGsfTrkIdTGsfDphiFilter","hltDiEle25CaloIdLMWPMS2UnseededFilter","hltDiEle27L1DoubleEGWPTightHcalIsoFilter","hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter","hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter"};
+  TString ele_filters[9] ={ "hltEle32WPTightGsfTrackIsoFilter",
+                            "hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg1Filter",
+                            "hltEle23Ele12CaloIdLTrackIdLIsoVLTrackIsoLeg2Filter",
+                            "hltEle115CaloIdVTGsfTrkIdTGsfDphiFilter",
+                            "hltEle50CaloIdVTGsfTrkIdTGsfDphiFilter",
+                            "hltDiEle25CaloIdLMWPMS2UnseededFilter",
+                            "hltDiEle27L1DoubleEGWPTightHcalIsoFilter",
+                            "hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
+                            "hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter"
+                          };
 
-  TString mu_filters[6] = {"hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07","hltL3fL1DoubleMu155fPreFiltered8","hltL3fL1DoubleMu155fFiltered17","hltDiMuon178RelTrkIsoFiltered0p4","hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered12","hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered23"};
+  TString mu_filters[6] = { "hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
+                            "hltL3fL1DoubleMu155fPreFiltered8",
+                            "hltL3fL1DoubleMu155fFiltered17",
+                            "hltDiMuon178RelTrkIsoFiltered0p4",
+                            "hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered12",
+                            "hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered23"
+                          };
 
   if(isMC_)
   {  // Get gen weight info
