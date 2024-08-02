@@ -1,27 +1,27 @@
 #ifndef Ntupler_h
 #define Ntupler_h
 
-// system include files
+ // system include files
 #include <memory>
 #include <vector>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
-#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h" // Updated include
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 
-//Electron related header files
+// Electron related header files
 #include "DataFormats/EgammaCandidates/interface/GsfElectron.h"
 #include "DataFormats/PatCandidates/interface/Electron.h"
 #include "DataFormats/EgammaCandidates/interface/ConversionFwd.h"
 #include "DataFormats/EgammaCandidates/interface/Conversion.h"
-#include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
-#include "RecoEgamma/EgammaTools/interface/EffectiveAreas.h"
+#include "CommonTools/Egamma/interface/ConversionTools.h"
+#include "CommonTools/Egamma/interface/EffectiveAreas.h"
 
-//Vertex related header files
+// Vertex related header files
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
@@ -45,10 +45,10 @@
 
 // c++ and root related header files
 #include <regex>
-#include "TString.h" 
+#include "TString.h"
 #include "TTree.h"
 #include "Math/VectorUtil.h"
-#include <string> 
+#include <string>
 #include <algorithm>
 
 // HLT related header files
@@ -67,87 +67,72 @@
 #include "DataFormats/L1Trigger/interface/EGamma.h"
 #include "DataFormats/L1Trigger/interface/Muon.h"
 
-//
 // class declaration
-//
-
-class Ntupler : public edm::EDAnalyzer {
+class Ntupler : public edm::one::EDAnalyzer<> {
    public:
       explicit Ntupler(const edm::ParameterSet&);
       ~Ntupler();
 
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-      enum ElectronMatchType {UNMATCHED = 0, 
-			  TRUE_PROMPT_ELECTRON, 
-			  TRUE_ELECTRON_FROM_TAU,
-			  TRUE_NON_PROMPT_ELECTRON}; // The last does not include tau parents
+      enum ElectronMatchType {UNMATCHED = 0,
+                          TRUE_PROMPT_ELECTRON,
+                          TRUE_ELECTRON_FROM_TAU,
+                          TRUE_NON_PROMPT_ELECTRON}; // The last does not include tau parents
 
    private:
       virtual void beginJob() override;
       virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
       virtual void endJob() override;
 
-      //virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
-      //virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
-      //virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
-      //virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
-
-      int matchToTruth(const edm::Ptr<reco::GsfElectron> el,  
-		       const edm::Handle<edm::View<reco::GenParticle>>  &prunedGenParticles);
+      int matchToTruth(const edm::Ptr<reco::GsfElectron> el,
+                       const edm::Handle<edm::View<reco::GenParticle>>  &prunedGenParticles);
       void findFirstNonElectronMother(const reco::Candidate *particle, int &ancestorPID, int &ancestorStatus);
       bool hasWZasMother(const reco::GenParticle  p)  ;
       static bool cmd(const reco::GenParticle & s1,const reco::GenParticle & s2);
 
-  	// ----------member data ---------------------------
-      // Data members that are the same for AOD and miniAOD
+      // member data
       edm::EDGetTokenT<edm::View<PileupSummaryInfo> > pileupToken_;
       edm::EDGetTokenT<double> rhoToken_;
       edm::EDGetTokenT<reco::BeamSpot> beamSpotToken_;
       edm::EDGetTokenT<GenEventInfoProduct> genEventInfoProduct_;
 
-      // AOD case data members
       edm::EDGetToken electronsToken_;
       edm::EDGetToken muonsToken_;
       edm::EDGetTokenT<reco::VertexCollection> vtxToken_;
       edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
       edm::EDGetTokenT<reco::ConversionCollection> conversionsToken_;
 
-      // Trigger Tokens
       edm::EDGetToken triggerResultsToken_;
       edm::EDGetToken triggerSummaryToken_;
       edm::EDGetToken l1EGtoken_;
       edm::EDGetToken l1Muontoken_;
       edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection> triggerObjects_;
-      edm::EDGetTokenT<pat::PackedTriggerPrescales>triggerPrescale_; 
-      HLTConfigProvider hltConfig; 
+      edm::EDGetTokenT<pat::PackedTriggerPrescales> triggerPrescale_;
+      HLTConfigProvider hltConfig;
       std::vector<std::string> pathsToSave_;
       std::vector<std::string> filterToMatch_;
       std::string HLTprocess_;
 
-      // MiniAOD case data members
       edm::EDGetToken electronsMiniAODToken_;
       edm::EDGetTokenT<reco::VertexCollection> vtxMiniAODToken_;
       edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesMiniAODToken_;
       edm::EDGetTokenT<reco::ConversionCollection> conversionsMiniAODToken_;
       edm::EDGetToken muonsMiniAODToken_;
-  
-     // VID decisions objects
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapLooseToken_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMediumToken_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapTightToken_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP90Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP80Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWPLooseToken_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80Token_;
-     edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
-     edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
-     edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
 
-      // L1 Token
-      edm::EDGetToken muToken;
-  
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapLooseToken_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMediumToken_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapTightToken_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP90Token_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWP80Token_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAnoIsoWPLooseToken_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP90Token_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWP80Token_;
+      edm::EDGetTokenT<edm::ValueMap<bool> > eleIdMapMVAIsoWPLooseToken_;
+      edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenIso_;
+      edm::EDGetTokenT<edm::ValueMap<float> > eleMVAValuesMapTokenNoIso_;
+
+      edm::EDGetToken muToken; 
      // Verbose output for ID
      bool isMC_;
      bool doEle_;
@@ -175,13 +160,17 @@ class Ntupler : public edm::EDAnalyzer {
    
      // All Electron filters and variables
    
-     std::vector<bool> passFilterEle35;
-     std::vector<bool> passFilterEle23_12_leg1;
-     std::vector<bool> passFilterEle23_12_leg2;
-     std::vector<bool> passFilterMu12_Ele23_legEle;
-     std::vector<bool> passFilterMu23_Ele12_legEle;
-     std::vector<bool> L1EG_35 ;
-     std::vector<bool> L1EG_23_12 ;
+     std::vector<bool> passFilterDSTMuon;
+     std::vector<bool> passFilterDSTEG16EG12;
+     std::vector<bool> passFilterDSTSingleEG30;
+     std::vector<bool> passFilterDSTJetHT;
+     //std::vector<bool> passFilterEle35;
+     //std::vector<bool> passFilterEle23_12_leg1;
+     //std::vector<bool> passFilterEle23_12_leg2;
+     //std::vector<bool> passFilterMu12_Ele23_legEle;
+     //std::vector<bool> passFilterMu23_Ele12_legEle;
+     //std::vector<bool> L1EG_35 ;
+     //std::vector<bool> L1EG_23_12 ;
      std::vector<bool> passEleIdLoose_;
      std::vector<bool> passEleIdMedium_;
      std::vector<bool> passEleIdTight_;

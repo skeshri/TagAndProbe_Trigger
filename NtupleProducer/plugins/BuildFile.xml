@@ -8,6 +8,7 @@
 <use name="SimDataFormats/GeneratorProducts"/>
 <use name="FWCore/ServiceRegistry"/>
 <use name="CommonTools/UtilAlgos"/>
+<use name="CommonTools/Egamma"/>
 <use name="DataFormats/EgammaCandidates"/>
 <use name="RecoEgamma/EgammaTools"/>
 <use name="DataFormats/PatCandidates"/>
