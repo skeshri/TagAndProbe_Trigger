@@ -1,28 +1,19 @@
-# TagAndProbe_Trigger
+# TagAndProbe_Trigger 
+### Part 1: Ntupler
 
-###### https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2#Working_points_for_92X_samples_R
-cmsrel CMSSW_9_4_9  
-cd CMSSW_9_4_9/src  
+```
+cmsrel CMSSW_14_0_12  
+cd CMSSW_14_0_12/src  
 cmsenv  
 git cms-init  
-git cms-merge-topic guitargeek:EgammaID_9_4_X  
-scram b -j 4  
-
-###### Download the TagAndProbe_trigger repository
+git cms-addpkg RecoEgamma/ElectronIdentification
 git clone https://github.com/skeshri/TagAndProbe_Trigger.git  
-scram b -j 4  
-
-## For Test Run 
-cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test   
-<br>  
+scram b -j 4   
+```
+*For test run*
+```
+cd $CMSSW_BASE/src/TagAndProbe_Trigger/NtupleProducer/test     
 cmsRun runNtupler.py  
-<br>  
-cp TnP_ntuple.root $CMSSW_BASE/src/TagAndProbe_Trigger/TagAndProbeMacros  (one example file is already present in the directory)  
-<br>  
-cd $CMSSW_BASE/src/TagAndProbe_Trigger/TagAndProbeMacros/  
-<br>  
-./compileNrun_tnp.sh TagAndProbe_Ele.C 
-(OR TagAndProbe_Mu.C, This script is self explaining when run it)   
-<br>   
-./runPlotting.sh histNames_Ele.txt 
-(OR histNames_Mu.txt, this will generate final results in the "results" directory)   
+```
+### More instructions to come for Efficiency calculations
+
