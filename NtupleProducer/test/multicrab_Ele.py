@@ -6,7 +6,14 @@ dataset = {
    #'Run2017C' : '/SingleElectron/Run2017C-31Mar2018-v1/MINIAOD', 
    #'Run2017D' : '/SingleElectron/Run2017D-31Mar2018-v1/MINIAOD', 
    #'Run2017E' : '/SingleElectron/Run2017E-31Mar2018-v1/MINIAOD', 
-   'Run2023D' : '/ScoutingPFMonitor/Run2023D-PromptReco-v2/MINIAOD', 
+   #'Run2023D' : '/ScoutingPFMonitor/Run2023D-PromptReco-v2/MINIAOD',
+   'Run2023A' : '/ScoutingPFMonitor/Run2023A-PromptReco-v2/MINIAOD',
+   'Run2023B': '/ScoutingPFMonitor/Run2023B-PromptReco-v1/MINIAOD',
+   'Run2023Cv1': '/ScoutingPFMonitor/Run2023C-PromptReco-v1/MINIAOD',
+   'Run2023Cv2': '/ScoutingPFMonitor/Run2023C-PromptReco-v2/MINIAOD',
+   'Run2023Cv3': '/ScoutingPFMonitor/Run2023C-PromptReco-v3/MINIAOD',
+   'Run2023Cv4': '/ScoutingPFMonitor/Run2023C-PromptReco-v4/MINIAOD',
+   'Run2023Dv1' : '/ScoutingPFMonitor/Run2023D-PromptReco-v1/MINIAOD', 
    }
 
 
@@ -16,7 +23,13 @@ lumisPerJob = {
    #'Run2017C':        100,
    #'Run2017D':        100,
    #'Run2017E':        100,
-   'Run2023D':        200,
+   'Run2023A':        200,
+   'Run2023B':        200,
+   'Run2023Cv1':        200,
+   'Run2023Cv2':        200,
+   'Run2023Cv3':        200,
+   'Run2023Cv4':        200,
+   'Run2023Dv1':        200,
    }
 
 listOfSamples = [
@@ -24,7 +37,13 @@ listOfSamples = [
    #'Run2017C',        
    #'Run2017D',        
    #'Run2017E',        
-   'Run2023D',        
+   'Run2023A',        
+   'Run2023B',        
+   'Run2023Cv1',        
+   'Run2023Cv2',        
+   'Run2023Cv3',        
+   'Run2023Cv4',        
+   'Run2023Dv1',        
    ]
 
 if __name__ == '__main__':

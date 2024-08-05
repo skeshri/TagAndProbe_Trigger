@@ -1,6 +1,7 @@
 #!/bin/bash
 
-AllFiles="AllRootFiles.txt"
+#AllFiles="AllRootFiles.txt"
+AllFiles="RootFilesForPlotting.txt"
 
 if [[ "$#" -lt 1 ]]; 
 then

@@ -5,7 +5,7 @@
 
 //  g++ Run_TnP.cxx -o tnp  `root-config --libs --cflags`    to compile the code
 
-void RunLoop(TString file, TString output)
+void RunLoop(TString file, TString output="efficiency.root")
 //void RunLoop(void)
 {
 
@@ -20,12 +20,14 @@ void RunLoop(TString file, TString output)
   Int_t counter=0;
   while(in.good()) {
     in >> currentFile;
+    std::cout<<currentFile<<endl;
     if (!currentFile.Contains("root")) continue; // protection
     chain->Add(currentFile.Data());
   }
   in.close();
 //  gSystem->CompileMacro("TrigEff_mc.C","f");
-  TagAndProbe t(chain);
+  //TagAndProbe t(chain);
+  Scouting_Efficiency t(chain);
   t.Loop(output);
 
 }
@@ -41,7 +43,8 @@ int main(int argc, char ** argv)
         return 1;
     }
   TString file = argv[1];
-  TString output = argv[2];
+  TString output = "efficiency.root";
+  if (argc == 3) output = argv[2];
 
   RunLoop(file,output); // just call the "ROOT Script"
 //  RunLoop(); // just call the "ROOT Script"

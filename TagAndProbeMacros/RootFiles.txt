@@ -1,1 +1,1 @@
-TnP_ntuple.root
+/eos/user/s/skeshri/HLT_scouting_Egamma/2024/lxplu8/CMSSW_14_0_12/src/TagAndProbe_Trigger/TagAndProbeMacros/TnP_ntuple.root

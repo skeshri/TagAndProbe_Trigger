@@ -1,0 +1,3 @@
+/eos/user/s/skeshri/HLT_Egamma_ntuple/Scouting_Run3/ScoutingPFMonitor/Run2023A/240802_121104/0000/TnP_ntuple_3.root
+/eos/user/s/skeshri/HLT_Egamma_ntuple/Scouting_Run3/ScoutingPFMonitor/Run2023A/240802_121104/0000/TnP_ntuple_1.root
+/eos/user/s/skeshri/HLT_Egamma_ntuple/Scouting_Run3/ScoutingPFMonitor/Run2023A/240802_121104/0000/TnP_ntuple_2.root
